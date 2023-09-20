@@ -16,6 +16,7 @@ node node-server.js
 
 ## Capturing the Application Traffic
 Install the application using ADB or by drag and drop. Once installed, launch the application and you’ll see the following screen.
+
 ![](image/app.png)
 
 This application is compiled with URL http://192.168.18.134 so we need to make a little change in our burp proxy to redirect all requests to our 127.0.0.1:1337.
@@ -32,7 +33,7 @@ Now let’s move on to getting the encryption keys and understanding the encrypt
 One way of getting the encryption keys is to Reverse Engineering the application and analyze its source code but if the application is obfuscated then understanding the source code becomes relatively hard. So we’ll be skipping the Reverse Engineering part as we already have application [source code](https://github.com/nhott/AES-Android/blob/main/node-server.js/my_activity.java) and below is the code segment from the encryption method.
 
 We can see that the application is using `AES/CBC/PKCS5PADDING` encryption using Secret Key `aaaaaaaaaaaaaaaa` and IV Parameter `bbbbbbbbbbbbbbbb`
-Using [frida-hook.py](https://github.com/nhott/AES-Android/blob/main/node-server.js)/frida-hook.py) python script to load and execute our JS code using frida
+Using [frida-hook.py](https://github.com/nhott/AES-Android/blob/main/node-server.js) python script to load and execute our JS code using frida
 
 ## Hooking with Frida
 Now run the python script to launch the application and execute our JS code.
